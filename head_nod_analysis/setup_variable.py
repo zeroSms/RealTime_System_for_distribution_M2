@@ -6,7 +6,8 @@
 # ================================= パスの取得 ================================ #
 import os
 
-path = os.getcwd().rsplit('\\', 1)[0]
+# path = os.getcwd().rsplit('\\', 1)[0]
+path = os.getcwd()
 server_address = '192.168.2.111'
 port_num = {'1': {'presenter': 5001,
                   'audience': 50001},

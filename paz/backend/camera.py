@@ -175,7 +175,8 @@ class VideoPlayer(object):
         global face_list
         self.camera.start()
         fourCC = cv2.VideoWriter_fourcc(*fourCC)
-        writer = cv2.VideoWriter(path + '/face/video/video' + self.ex_num + '.avi', fourCC, fps, self.image_size)
+        print(path)
+        writer = cv2.VideoWriter(path + '/video/video' + self.ex_num + '.avi', fourCC, fps, self.image_size)
         while True:
             output = self.step()
             if output is None:

@@ -11,7 +11,8 @@ path = os.getcwd()
 # server_address = '192.168.2.111'
 # server_address = '192.168.2.22'  # 3A, notePC
 # server_address = '172.19.0.44'  # cs-wlan, notePC
-server_address = '192.168.0.2'  # 4H-aterm, notePC
+# server_address = '192.168.0.2'  # 4H-aterm, notePC
+server_address = '192.168.0.18'  # 自宅, notePC
 
 port_num = {'1': {'audience': 63307}}
 

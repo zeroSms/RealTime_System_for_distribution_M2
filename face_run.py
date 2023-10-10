@@ -31,12 +31,14 @@ def face_detection(ex_num):
 if __name__ == "__main__":
     audience_num = input('被験者番号：')
     ex_num = input('実験番号：')
-    if input('サーバ通信[y/n]：') == 'y':
-        port_select = '1'
-        server = True
-    else:
-        port_select = '1'
-        server = False
+    # if input('サーバ通信[y/n]：') == 'y':
+    #     port_select = '1'
+    #     server = True
+    # else:
+    #     port_select = '1'
+    #     server = False
+    port_select = '1'
+    server = True
 
     # 頭の動きのセンシング　スレッド開始
     loop = asyncio.new_event_loop()

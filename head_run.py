@@ -43,12 +43,8 @@ def main():
     audience_num = input('被験者番号：')
     ex_num = input('実験番号：')
     eSense_num = input('eSenseの番号[1-8]：')
-    if input('サーバ通信[y/n]：') == 'y':
-        port_select = '1'
-        server = True
-    else:
-        port_select = '1'
-        server = False
+    port_select = '1'
+    server = True
 
     # eSenseのアドレスを取得
     address = get_address.Get(int(eSense_num))

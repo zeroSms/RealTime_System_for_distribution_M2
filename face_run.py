@@ -1,17 +1,16 @@
+from paz.pipelines import DetectMiniXceptionFER
+from paz.backend.camera import VideoPlayer
+from paz.backend.camera import Camera
+from head_nod_analysis.stop import Stop
+from head_nod_analysis import client_face
 import argparse
 import asyncio
 import threading
 
 # 自作ライブラリ
-import sys, os
+import sys
+import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
-from head_nod_analysis import client_face
-from head_nod_analysis.stop import Stop
-
-from paz.backend.camera import Camera
-from paz.backend.camera import VideoPlayer
-from paz.pipelines import DetectMiniXceptionFER
 
 
 def face_detection(ex_num):
@@ -43,7 +42,8 @@ if __name__ == "__main__":
     # 頭の動きのセンシング　スレッド開始
     loop = asyncio.new_event_loop()
     thread = threading.Thread(target=face_detection, args=(ex_num,))
-    thread_1 = threading.Thread(target=client_face.client_face, args=(server, port_select, audience_num,))
+    thread_1 = threading.Thread(target=client_face.client_face, args=(
+        server, port_select, audience_num,))
     thread_2 = threading.Thread(target=Stop)
 
     thread.start()
@@ -58,4 +58,3 @@ if __name__ == "__main__":
         thread.join()
 
     print('全てのスレッドが終了しました．これからデータログを送信します．')
-

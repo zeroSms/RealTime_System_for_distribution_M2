@@ -1,6 +1,7 @@
 #
 # 表情の決定と通信処理
 #
+import sys
 import time
 import socket
 import pickle
@@ -15,13 +16,14 @@ server_address = setup_variable.server_address
 
 
 # ================================= 表情の決定・通信 ================================ #
-def client_face(to_server=False, port_select='1', audience_num=0):
+def client_face(to_server=True, port_select='1', audience_num=0):
     if to_server:
         host = server_address  # サーバーのホスト名
         client_address = socket.gethostname()  # クライアント側のホスト名
         port = setup_variable.port_num[port_select]['audience']
 
-        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # オブジェクトの作成をします
+        client = socket.socket(
+            socket.AF_INET, socket.SOCK_STREAM)  # オブジェクトの作成をします
         client.connect((host, port))  # これでサーバーに接続します
 
         response = {'presenter': False,
@@ -43,8 +45,13 @@ def client_face(to_server=False, port_select='1', audience_num=0):
             response['timeStamp'] = round(timeStamp, 2)
             # response['action'] = setup_variable.face_symbol(pred_face[0])
             response['action'] = pred_face
-            massage = pickle.dumps(response)
-            client.send(massage)  # データを送信
+
+            try:
+                message = pickle.dumps(response)
+                client.sendall(message)  # データを送信
+            except Exception as e:
+                print(e)
+                continue
 
             # try:
             #     client.settimeout(2)

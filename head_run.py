@@ -1,6 +1,9 @@
 #
 # メイン関数
 #
+from head_nod_analysis.stop import Stop
+from head_nod_analysis.enter_label import Label
+from head_nod_analysis import add_data, process_data, get_address, setup_variable
 import threading
 import csv
 import asyncio
@@ -8,17 +11,17 @@ import os
 import shutil
 
 # 自作ライブラリ
-import sys, os
+import sys
+import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from head_nod_analysis import add_data, process_data, get_address, setup_variable
-from head_nod_analysis.enter_label import Label
-from head_nod_analysis.stop import Stop
 
 # ================================= パスの取得 ================================ #
 path = setup_variable.path
 
 # ================================= CSV出力 ================================ #
 # ログファイル出力
+
+
 def getCsv_log(realtime_file, ex_num):
     log_name = realtime_file + '\\value_list' + ex_num + '.csv'
     with open(log_name, 'w') as f:
@@ -26,6 +29,8 @@ def getCsv_log(realtime_file, ex_num):
         writer.writerows(add_data.log_data)
 
 # 教師データ，正解データ出力
+
+
 def getCsv_analysis(realtime_file, ex_num):
     window_name = realtime_file + '\\window_list' + ex_num + '.csv'
     answer_name = realtime_file + '\\answer_list' + ex_num + '.csv'
@@ -40,9 +45,9 @@ def getCsv_analysis(realtime_file, ex_num):
 # ================================= メイン関数 ================================ #
 # メイン関数
 def main():
-    audience_num = input('被験者番号：')
-    ex_num = input('実験番号：')
-    eSense_num = input('eSenseの番号[1-8]：')
+    audience_num = int(input('被験者番号：'))
+    ex_num = int(input('実験番号：'))
+    eSense_num = int(input('eSenseの番号[1-8]：'))
     port_select = '1'
     server = True
 
@@ -51,7 +56,8 @@ def main():
 
     loop = asyncio.new_event_loop()
     thread_1 = threading.Thread(target=add_data.AddData, args=(address, loop,))
-    thread_2 = threading.Thread(target=process_data.Realtime_analysis, args=(server, port_select, audience_num,))
+    thread_2 = threading.Thread(target=process_data.Realtime_analysis, args=(
+        server, port_select, audience_num,))
     thread_3 = threading.Thread(target=Stop)
     thread_4 = threading.Thread(target=Label)
 

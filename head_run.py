@@ -45,8 +45,8 @@ def getCsv_analysis(realtime_file, ex_num):
 # ================================= メイン関数 ================================ #
 # メイン関数
 def main():
-    audience_num = int(input('被験者番号：'))
-    ex_num = int(input('実験番号：'))
+    audience_num = str(int(input('被験者番号：')))
+    ex_num = str(int(input('実験番号：')))
     eSense_num = int(input('eSenseの番号[1-8]：'))
     port_select = '1'
     server = True
